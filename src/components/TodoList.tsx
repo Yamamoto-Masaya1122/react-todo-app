@@ -26,8 +26,17 @@ const TodoList = () => {
   const handleSubmit = (event) => {
     event.preventDefault()
     if(task === '') return
+    console.log({ task, isCompleted: false});
+    console.log(todos);
     setTodos(todos => [...todos,{ task, isCompleted: false}])
     setTask('')
+  }
+
+  const handleRemoveTask = index => {
+    console.log(index);
+    const newTodos = [...todos]
+    newTodos.splice(index,1)
+    setTodos(newTodos)
   }
 
   return(
@@ -45,7 +54,7 @@ const TodoList = () => {
       </form>
       <ul>
         { todos.map((todo, index) => (
-          <li key={ index }>{ todo.task }</li>
+          <li key={ index }>{ todo.task } <span onClick={() => handleRemoveTask(index)}>X</span></li>
         ))}
       </ul>
     </div>
